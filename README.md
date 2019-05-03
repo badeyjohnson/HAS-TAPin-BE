@@ -66,7 +66,7 @@ Folder structure below :open_file_folder:
 
 ## Contributing
 
-Please see [contributors](https://github.com/badeyjohnson/HAS-TAPin-BE/network/dependencies) on this project for more information.
+Please see [contributors](https://github.com/badeyjohnson/HAS-TAPin-BE/graphs/contributors) on this project for more information.
 
 ## Versioning
 
@@ -74,9 +74,9 @@ Please see [contributors](https://github.com/badeyjohnson/HAS-TAPin-BE/network/d
 
 ## Authors
 
-- **Tish Richardson** - _Initial work_ - [LRR1993](https://github.com/LRR1993)
-
-See also the list of [contributors](https://github.com/LRR1993/news_api/graphs/contributors) who participated in this project.
+- **Tish Richardson**  - [LRR1993](https://github.com/LRR1993)
+- **Ben Adey-Johnson** 
+- **Martin Tattersal** 
 
 ## License
 MIT
