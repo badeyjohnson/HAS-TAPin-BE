@@ -25,5 +25,8 @@ exports.seed = (knex, Promise) => {
     .then(() => {
       const formatedMaps = formatMaps(mapsData);
       return knex('maps').insert(formatedMaps);
+    })
+    .then(() => {
+      return knex('booklet').insert(bookletData);
     });
 };
