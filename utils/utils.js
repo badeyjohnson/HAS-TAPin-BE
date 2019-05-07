@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const zlib = require('zlib');
 
 exports.formatUsers = rawUsers => {
   return rawUsers.map(user => ({
@@ -12,4 +14,14 @@ exports.formatMaps = rawMaps => {
     ...map,
     coordinates: JSON.stringify(map.coordinates)
   }));
+};
+
+exports.formatPDF = () => {
+  const data = fs.readFileSync('db/data/H-S-Booklet.PDF');
+  const deflated = zlib.deflateSync(data).toString('base64');
+  return deflated;
+};
+
+exports.bufferPDF = () => {
+  const inflated = zlib.inflateSync(new Buffer(deflated, 'base64')).toString();
 };

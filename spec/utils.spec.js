@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { formatUsers, formatMaps } = require('../utils/utils');
+const { formatUsers, formatMaps, formatPDF } = require('../utils/utils');
 
 const bcrypt = require('bcrypt');
 
@@ -97,6 +97,11 @@ describe('Utils', () => {
       formatted.forEach(element => {
         expect(element.coordinates).to.be.a('string');
       });
+    });
+  });
+  describe.only('#formatPDF', () => {
+    it('converts pdf into a storeable format', () => {
+      expect(formatPDF()).to.be.a('string');
     });
   });
 });
