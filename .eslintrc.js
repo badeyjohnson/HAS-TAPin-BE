@@ -4,26 +4,17 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
-    mocha: true,
+    mocha: true
   },
-  extends: [
-    'airbnb',
-    'prettier',
-    'plugin:prettier/recommended',
-    'plugin:react/recommended',
-    'prettier/react',
-  ],
+  extends: 'airbnb-base',
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
+  plugins: ['prettier'],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
+    ecmaVersion: 2018
   },
-  plugins: ['react', 'prettier'],
   rules: {
     'comma-dangle': [
       'error',
@@ -32,8 +23,8 @@ module.exports = {
         objects: 'ignore',
         imports: 'never',
         exports: 'never',
-        functions: 'ignore',
-      },
+        functions: 'ignore'
+      }
     ],
     'no-restricted-globals': 1,
     'consistent-return': 0,
@@ -42,18 +33,20 @@ module.exports = {
     'arrow-body-style': 0,
     'no-param-reassign': 0,
     'prefer-promise-reject-errors': 0,
+    'space-before-function-paren': 0,
+    'arrow-parens': 0,
     'no-unused-vars': [
       1,
       {
-        argsIgnorePattern: 'Promise|res|next|^err',
-      },
+        argsIgnorePattern: 'Promise|res|next|^err'
+      }
     ],
     'prettier/prettier': [
       'error',
       {},
       {
-        usePrettierrc: true,
-      },
-    ],
-  },
+        usePrettierrc: true
+      }
+    ]
+  }
 };

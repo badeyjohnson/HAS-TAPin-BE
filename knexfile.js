@@ -1,26 +1,28 @@
 const { DATABASE_URL } = process.env;
 
-const ENV = process.env.NODE_ENV || "development";
+const ENV = process.env.NODE_ENV || 'development';
 
 const baseConfig = {
-  client: "mysql",
+  client: 'mysql',
   migrations: {
-    directory: "./db/migrations"
+    directory: './db/migrations'
   },
   seeds: {
-    directory: "./db/seeds"
+    directory: './db/seeds'
   }
 };
 
 const customConfigs = {
   development: {
     connection: {
-      database: "has_tap_in_api"
+      database: 'has_tap_in_api'
     }
   },
   test: {
     connection: {
-      database: "has_tap_in_api_test"
+      user: 'root',
+      password: 'northcoders',
+      database: 'has_tap_in_api_test'
     }
   },
   production: {
