@@ -5,7 +5,12 @@ const {
   sitesData,
   usersData,
   sitesUsersData,
-  questionsData
+  questionsData,
+  siteUsersData,
+  riskLevelData,
+  answersOptionsData,
+  siteSpecficData,
+  riskAnswersData
 } = require('../data');
 
 const { formatUsers, formatMaps } = require('../../utils/utils');
@@ -36,5 +41,20 @@ exports.seed = (knex, Promise) => {
     })
     .then(() => {
       return knex('questions').insert(questionsData);
+    })
+    .then(() => {
+      return knex('site_users').insert(siteUsersData);
+    })
+    .then(() => {
+      return knex('risk_level').insert(riskLevelData);
+    })
+    .then(() => {
+      return knex('answers_options').insert(answersOptionsData);
+    })
+    .then(() => {
+      return knex('site_specfic').insert(siteSpecficData);
+    })
+    .then(() => {
+      return knex('risk_answers').insert(riskAnswersData);
     });
 };
