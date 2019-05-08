@@ -52,9 +52,9 @@ exports.seed = (knex, Promise) => {
       return knex('answers_options').insert(answersOptionsData);
     })
     .then(() => {
-      return knex('site_specfic').insert(siteSpecficData);
+      return knex('site_specific').insert(siteSpecficData);
     })
     .then(() => {
-      return knex('risk_answers').insert(riskAnswersData);
+      return knex('risks_answers').insert(riskAnswersData);
     });
 };

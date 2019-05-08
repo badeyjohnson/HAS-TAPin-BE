@@ -261,10 +261,18 @@ module.exports = [
     answers_options: 3,
     mitigation_Measures: null,
     risk_level: null,
-    mutili_option: ['Safety helmet', 'Safety boots', 'High visibility jacket / vest (Yellow)']
+    mutili_option: null
   },
   {
-    question_id: 33,
+    question_id: 34,
+    site_specific_id: 1,
+    answers_options: null,
+    mitigation_Measures: null,
+    risk_level: null,
+    mutili_option: '["Safety helmet", "Safety boots", "High visibility jacket/vest (Yellow)"]'
+  },
+  {
+    question_id: 35,
     site_specific_id: 1,
     answers_options: null,
     mitigation_Measures: null,

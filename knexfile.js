@@ -15,6 +15,8 @@ const baseConfig = {
 const customConfigs = {
   development: {
     connection: {
+      user: 'root',
+      password: 'northcoders',
       database: 'has_tap_in_api'
     }
   },

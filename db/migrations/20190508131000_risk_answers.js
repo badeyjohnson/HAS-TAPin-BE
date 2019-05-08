@@ -17,7 +17,7 @@ exports.up = function(knex, Promise) {
     risksAnswersTable
       .foreign('risk_level')
       .references('risk_level.risk_level_id');
-    risksAnswersTable.json('mutili_option');
+    risksAnswersTable.text('mutili_option');
   });
 };
 

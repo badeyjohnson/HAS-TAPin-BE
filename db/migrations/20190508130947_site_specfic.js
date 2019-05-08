@@ -3,8 +3,7 @@ exports.up = function(knex, Promise) {
     siteSpecficTable.increments('site_specific_id').primary();
     siteSpecficTable.integer('site_id').unsigned();
     siteSpecficTable.foreign('site_id').references('sites.site_id');
-    siteSpecficTable.string('user').unsigned();
-    siteSpecficTable.foreign('user').references('users.email');
+    siteSpecficTable.string('user').references('users.email');
     siteSpecficTable.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
