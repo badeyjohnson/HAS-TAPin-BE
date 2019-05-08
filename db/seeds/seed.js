@@ -3,7 +3,9 @@ const {
   jobsData,
   mapsData,
   sitesData,
-  usersData
+  usersData,
+  sitesUsersData,
+  questionsData
 } = require('../data');
 
 const { formatUsers, formatMaps } = require('../../utils/utils');
@@ -23,10 +25,16 @@ exports.seed = (knex, Promise) => {
       return knex('sites').insert(sitesData);
     })
     .then(() => {
+      return knex('sites_users').insert(sitesUsersData);
+    })
+    .then(() => {
       const formatedMaps = formatMaps(mapsData);
       return knex('maps').insert(formatedMaps);
     })
     .then(() => {
       return knex('booklet').insert(bookletData);
+    })
+    .then(() => {
+      return knex('questions').insert(questionsData);
     });
 };
