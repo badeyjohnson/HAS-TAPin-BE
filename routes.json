@@ -1,5 +1,8 @@
-{ "api-routes" :
+{ "/api" :
   { 
-    ""
+    "/user" : {
+      "/" : "returns all users", 
+      "/:id" : "returns a single user by id"
+    }
   }
 }
