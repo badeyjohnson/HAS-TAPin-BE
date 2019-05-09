@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-expressions */
+const bcrypt = require('bcrypt');
 const { expect } = require('chai');
 const { formatUsers, formatMaps, formatPDF } = require('../utils/utils');
-
-const bcrypt = require('bcrypt');
 
 describe('Utils', () => {
   describe('#formatUsers', () => {

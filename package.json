@@ -29,10 +29,10 @@
     "mysql": "^2.17.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "chai-sorted": "^0.2.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.17.2",
@@ -45,7 +45,9 @@
     "supertest": "^4.0.2"
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   },
   "engines": {
     "node": "11.x"

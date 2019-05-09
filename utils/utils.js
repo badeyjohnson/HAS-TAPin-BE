@@ -22,6 +22,9 @@ exports.formatPDF = () => {
   return deflated;
 };
 
-exports.bufferPDF = () => {
-  const inflated = zlib.inflateSync(new Buffer(deflated, 'base64')).toString();
+exports.bufferPDF = deflated => {
+  const inflated = zlib.inflateSync(
+    Buffer.from((deflated, 'base64')).toString()
+  );
+  return inflated;
 };
