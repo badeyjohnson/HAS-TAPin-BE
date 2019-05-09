@@ -8,7 +8,7 @@ H&amp;S Tap app backend repo
 ## Table of Contents :book:
 
 1.  [Getting Started](#Getting-Started)
-    1.  [Links to other repos](#Links-to-other-repos)
+2.  [Links to other repos](#Links-to-other-repos)
 3.  [Built With](#Built-With)
 4.  [Versioning](#Versioning)
 5.  [Authors](#Authors)
@@ -57,6 +57,26 @@ Folder structure below :open_file_folder:
  ├── Procfile
  ├── README.md
 ```
+
+### Running mySQL database
+
+1. Set up MySQL database [download](https://dev.mysql.com/downloads/mysql/8.0.html) MySQL. You will need to sign up for an Oracle account to do this. Follow the installation instructions. The password required within the installation will be the password for the root access to MySQL. 
+
+2. Add mysql to the PATH,
+```bash
+export PATH=${PATH}:/usr/local/mysql/bin/ 
+
+source ~/.zshrc 
+```
+
+3. You may also want to create a non-root user with privileges for the connection
+
+4. Create a knexfile.js using the `example-knexfile.js` as a template.
+
+5. In terminal,
+`npm run setup-dbs` to set up the databases, 
+`npm run seed-test` to set up seed the test database.
+
 
 ## Built-With
 
