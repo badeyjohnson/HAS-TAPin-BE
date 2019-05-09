@@ -6,16 +6,31 @@ module.exports = {
     node: true,
     mocha: true
   },
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb-base',
+    'prettier',
+    'eslint:recommended',
+    'plugin:prettier/recommended'
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
   },
   plugins: ['prettier'],
   parserOptions: {
-    ecmaVersion: 2018
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
+  parser: 'babel-eslint',
   rules: {
+    strict: 1,
+    'nonblock-statement-body-position': 0,
+    'operator-linebreak': 0,
+    indent: 0,
+    curly: 0,
     'comma-dangle': [
       'error',
       {
