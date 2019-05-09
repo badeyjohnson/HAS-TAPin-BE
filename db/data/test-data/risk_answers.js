@@ -13,7 +13,7 @@ module.exports = [
     answers_options: null,
     mitigation_Measures: null,
     risk_level: null,
-    mutili_option: 012341234123
+    mutili_option: Number('011324298765')
   },
   {
     question_id: 3,
@@ -269,7 +269,8 @@ module.exports = [
     answers_options: null,
     mitigation_Measures: null,
     risk_level: null,
-    mutili_option: '["Safety helmet", "Safety boots", "High visibility jacket/vest (Yellow)"]'
+    mutili_option:
+      '["Safety helmet", "Safety boots", "High visibility jacket/vest (Yellow)"]'
   },
   {
     question_id: 35,
