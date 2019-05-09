@@ -99,7 +99,7 @@ describe('Utils', () => {
       });
     });
   });
-  describe.only('#formatPDF', () => {
+  describe('#formatPDF', () => {
     it('converts pdf into a storeable format', () => {
       expect(formatPDF()).to.be.a('string');
     });
