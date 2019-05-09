@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     sitesTable.increments('site_id').primary();
     sitesTable.integer('job_no').references('jobs.job_no');
     sitesTable.string('site_name').notNullable();
+    sitesTable.string('site_description').notNullable();
   });
 };
 

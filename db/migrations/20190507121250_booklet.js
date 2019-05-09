@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
       .string('version')
       .primary()
       .unique();
-    bookletTable.text('content').notNullable();
+    bookletTable.text('content', 'mediumtext').notNullable();
   });
 };
 
