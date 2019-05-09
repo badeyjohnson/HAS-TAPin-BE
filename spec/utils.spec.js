@@ -1,7 +1,7 @@
-const { expect } = require('chai');
-const { formatUsers, formatMaps } = require('../utils/utils');
-
+/* eslint-disable no-unused-expressions */
 const bcrypt = require('bcrypt');
+const { expect } = require('chai');
+const { formatUsers, formatMaps, formatPDF } = require('../utils/utils');
 
 describe('Utils', () => {
   describe('#formatUsers', () => {
@@ -97,6 +97,11 @@ describe('Utils', () => {
       formatted.forEach(element => {
         expect(element.coordinates).to.be.a('string');
       });
+    });
+  });
+  describe('#formatPDF', () => {
+    it('converts pdf into a storeable format', () => {
+      expect(formatPDF()).to.be.a('string');
     });
   });
 });
