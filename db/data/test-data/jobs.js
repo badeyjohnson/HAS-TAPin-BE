@@ -11,7 +11,7 @@ module.exports = [
     job_no: 123123,
     job_name: 'test project b',
     pm_first_name: 'firstname-b',
-    pm_last_name: 'lastnam-b',
+    pm_last_name: 'lastname-b',
     pm_email: 'test-b@arup.com',
     pm_number: 12345678912
   },
