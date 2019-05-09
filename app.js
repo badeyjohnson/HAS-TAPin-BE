@@ -1,5 +1,7 @@
 const express = require('express');
+// const bodyParser = require('body-parser');
 const cors = require('cors');
+const { apiRouter } = require('./routers/api-router');
 const {
   routeNotFound,
   handle500,
@@ -10,7 +12,10 @@ const {
 const app = express();
 
 app.use(cors());
+// app.use(bodyParser);
 app.use(express.json());
+
+app.use('/api', apiRouter);
 
 app.all('/*', routeNotFound);
 
