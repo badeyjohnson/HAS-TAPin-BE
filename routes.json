@@ -18,6 +18,15 @@
       "POST -> /:job_no/sites" : {
         "creates new site in database" : "POST: {site_name: '', site_description: ''}"
       }
+    },
+    "/sites" : {
+      "GET -> /" : "returns all sites",
+      "GET -> /:site_id" : "returns a single site by id",
+      "GET -> /:site_id/risk_assessments" : "returns all risk assessment ids for the specified site",
+      "POST -> /:site_id/risk_assessments" : {
+        "creates new risk asssessment in database" : "POST: {site_name: '', site_description: ''}"
+      },
+      "GET -> /:site_id/:site_specific_id" : "returns the specified filled risk assessment"
     }
   }
 }
