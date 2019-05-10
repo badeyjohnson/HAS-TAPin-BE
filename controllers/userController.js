@@ -2,7 +2,8 @@ const {
   getAllUsers,
   getUser,
   getJobs,
-  postJobUserLink
+  postJobUserLink,
+  postNewJob
 } = require('../models/userModels');
 
 exports.fetchAllUsers = (req, res, next) => {
@@ -35,5 +36,12 @@ exports.sendJobUserLink = (req, res, next) => {
   postJobUserLink(req.params, req.body).then(returned => {
     if (returned) res.status(202).json({ response: 'Job added to user' });
     else next(res.status(400).json({ response: 'Job not found' }));
+  });
+};
+
+exports.sendNewJob = (req, res, next) => {
+  postNewJob(req.params, req.body).then(job => {
+    if (job) res.status(202).json({ response: 'Job created' });
+    else next(res.status(400).json({ response: 'errored' }));
   });
 };

@@ -68,6 +68,23 @@ describe('/api', () => {
                 });
               });
           });
+          it('POST status:200 adds a job', () => {
+            const newJob = {
+              job_no: 101010,
+              job_name: 'thisIsANewJob',
+              pm_first_name: 'firstname-d',
+              pm_last_name: 'lastname-d',
+              pm_email: 'test-d@newJob.com',
+              pm_number: '1234567'
+            };
+            return request
+              .post('/api/users/jonny.bravo@arup.com/jobs')
+              .send(newJob)
+              .expect(202)
+              .then(({ body: { response } }) => {
+                expect(response).to.equal('Job created');
+              });
+          });
         });
         describe('/:email/jobs/link', () => {
           describe('DEFAULT BEHAVIOUR', () => {

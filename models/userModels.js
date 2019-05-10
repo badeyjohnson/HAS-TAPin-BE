@@ -39,3 +39,32 @@ exports.postJobUserLink = ({ email }, { job_no }) => {
       else return connection.insert({ job_no, email }).into('jobs_users');
     });
 };
+
+exports.postNewJob = (
+  { email },
+  { job_no, job_name, pm_first_name, pm_last_name, pm_email, pm_number }
+) => {
+  return connection
+    .select('job_no')
+    .from('jobs')
+    .then(jobNumbers => {
+      const isExistingJob = jobNumbers.filter(
+        jobNumber => jobNumber.job_no === job_no
+      );
+      if (isExistingJob.length === 0)
+        return connection
+          .insert({
+            job_no,
+            job_name,
+            pm_first_name,
+            pm_last_name,
+            pm_email,
+            pm_number
+          })
+          .into('jobs')
+          .then(() => {
+            return connection.insert({ job_no, email }).into('jobs_users');
+          });
+      else return;
+    });
+};
