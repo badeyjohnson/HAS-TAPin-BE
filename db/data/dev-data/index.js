@@ -9,3 +9,4 @@ exports.riskLevelData = require('./risk_level');
 exports.answersOptionsData = require('./answers_options');
 exports.siteSpecficData = require('./site_specfic');
 exports.riskAnswersData = require('./risk_answers');
+exports.jobsUsersData = require('./jobs_users');
