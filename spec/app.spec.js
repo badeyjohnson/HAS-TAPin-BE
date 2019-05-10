@@ -82,18 +82,18 @@ describe('/api', () => {
                 });
             });
           });
-          // describe('ERROR HANDLING', () => {
-          //   it('POST status:400 job does not exist to a user', () => {
-          //     const newLink = { job_no: 9999123 };
-          //     return request
-          //       .post('/api/users/jonny.bravo@arup.com/jobs/link')
-          //       .send(newLink)
-          //       .expect(400)
-          //       .then(({ body: { response } }) => {
-          //         expect(response).to.equal('Job not found');
-          //       });
-          //   });
-          // });
+          describe('ERROR HANDLING', () => {
+            it('POST status:400 job does not exist to a user', () => {
+              const newLink = { job_no: 9999123 };
+              return request
+                .post('/api/users/jonny.bravo@arup.com/jobs/link')
+                .send(newLink)
+                .expect(400)
+                .then(({ body: { response } }) => {
+                  expect(response).to.equal('Job not found');
+                });
+            });
+          });
         });
       });
     });

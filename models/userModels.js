@@ -28,5 +28,14 @@ exports.getJobs = ({ email }) => {
 };
 
 exports.postJobUserLink = ({ email }, { job_no }) => {
-  return connection.insert({ job_no, email }).into('jobs_users');
+  return connection
+    .select('job_no')
+    .from('jobs')
+    .then(jobNumbers => {
+      const isExistingJob = jobNumbers.filter(
+        jobNumber => jobNumber.job_no === job_no
+      );
+      if (isExistingJob.length === 0) return;
+      else return connection.insert({ job_no, email }).into('jobs_users');
+    });
 };
