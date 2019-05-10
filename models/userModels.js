@@ -13,7 +13,16 @@ exports.getUser = ({ email }) => {
 
 exports.getJobs = ({ email }) => {
   return connection
-    .select('*')
+    .select(
+      'jobs.job_no',
+      'job_name',
+      'pm_first_name',
+      'pm_last_name',
+      'pm_email',
+      'pm_number'
+    )
     .from('jobs')
-    .where({ email });
+    .join('jobs_users', 'jobs_users.job_no', '=', 'jobs.job_no')
+    .join('users', 'users.email', '=', 'jobs_users.email')
+    .where({ 'users.email': email });
 };

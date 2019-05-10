@@ -15,7 +15,7 @@ describe('/api', () => {
   after(() => {
     connection.destroy();
   });
-  describe('/users', () => {
+  describe('/jobs', () => {
     describe('DEFAULT BEHAVIOUR', () => {
       it('GETs status:200 returns all users', () => {
         return request
@@ -50,21 +50,25 @@ describe('/api', () => {
         });
       });
       describe('/:email/jobs', () => {
-        // describe('DEFAULT BEHAVIOUR', () => {
-        //   it('GETs status:200 a users jobs based on user id', () => {
-        //     return request
-        //       .get('/api/users/jonny.bravo@arup.com/jobs')
-        //       .expect(200)
-        //       .then(({ body: { jobs } }) => {
-        //         expect(user).to.contain.keys(
-        //           'email',
-        //           'first_name',
-        //           'last_name',
-        //           'password'
-        //         );
-        //       });
-        //   });
-        // });
+        describe('DEFAULT BEHAVIOUR', () => {
+          it('GETs status:200 a users jobs based on user id', () => {
+            return request
+              .get('/api/users/jonny.bravo@arup.com/jobs')
+              .expect(200)
+              .then(({ body: { jobs } }) => {
+                jobs.forEach(jobs => {
+                  expect(jobs).to.contain.keys(
+                    'job_no',
+                    'job_name',
+                    'pm_first_name',
+                    'pm_last_name',
+                    'pm_email',
+                    'pm_number'
+                  );
+                });
+              });
+          });
+        });
       });
     });
   });
