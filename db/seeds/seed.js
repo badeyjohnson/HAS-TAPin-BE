@@ -10,7 +10,8 @@ const {
   riskLevelData,
   answersOptionsData,
   siteSpecficData,
-  riskAnswersData
+  riskAnswersData,
+  jobsUsersData
 } = require('../data');
 
 const { formatUsers, formatMaps } = require('../../utils/utils');
@@ -56,5 +57,8 @@ exports.seed = (knex, Promise) => {
     })
     .then(() => {
       return knex('risks_answers').insert(riskAnswersData);
+    })
+    .then(() => {
+      return knex('jobs_users').insert(jobsUsersData);
     });
 };
