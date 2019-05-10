@@ -32,7 +32,8 @@ exports.fetchUserJobs = (req, res, next) => {
 };
 
 exports.sendJobUserLink = (req, res, next) => {
-  postJobUserLink(req.params, req.body).then(() => {
-    res.status(202).json({ response: 'Job added to user' });
+  postJobUserLink(req.params, req.body).then(returned => {
+    if (returned) res.status(202).json({ response: 'Job added to user' });
+    else next(res.status(400).json({ response: 'Job not found' }));
   });
 };
