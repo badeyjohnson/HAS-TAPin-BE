@@ -1,6 +1,6 @@
 { "/api" :
   { 
-    "/user" : {
+    "/users" : {
       "GET -> /" : "returns all users", 
       "GET -> /:email" : "returns a single user by email",
       "GET -> /:email/jobs" : "returns all jobs for the specified user",
@@ -9,6 +9,14 @@
       },
       "POST -> /:email/jobs/link" : {
         "links user to an existing job in the database" : "POST: {job_no: ''}"
+      }
+    },
+    "/jobs" : {
+      "GET -> /" : "returns all jobs",
+      "GET -> /:job_no" : "returns a single job by job number",
+      "GET -> /:job_no/sites" : "returns all sites for the specified job",
+      "POST -> /:job_no/sites" : {
+        "creates new site in database" : "POST: {site_name: '', site_description: ''}"
       }
     }
   }

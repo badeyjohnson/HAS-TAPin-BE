@@ -15,7 +15,7 @@ describe('/api', () => {
   after(() => {
     connection.destroy();
   });
-  describe('/jobs', () => {
+  describe('/users', () => {
     describe('DEFAULT BEHAVIOUR', () => {
       it('GET status:200 returns all users', () => {
         return request
@@ -33,7 +33,7 @@ describe('/api', () => {
           });
       });
     });
-    describe('/:email', () => {
+    describe('/users/:email', () => {
       describe('DEFAULT BEHAVIOUR', () => {
         it('GET status:200 a user based on user id', () => {
           return request
@@ -49,7 +49,7 @@ describe('/api', () => {
             });
         });
       });
-      describe('/:email/jobs', () => {
+      describe('/users/:email/jobs', () => {
         describe('DEFAULT BEHAVIOUR', () => {
           it('GET status:200 a users jobs based on user id', () => {
             return request
@@ -94,7 +94,7 @@ describe('/api', () => {
               });
           });
         });
-        describe('/:email/jobs/link', () => {
+        describe('/users/:email/jobs/link', () => {
           describe('DEFAULT BEHAVIOUR', () => {
             it('POST status:202 adds a existing job to a user', () => {
               const newLink = { job_no: 123123 };
@@ -127,6 +127,98 @@ describe('/api', () => {
                 });
             });
           });
+        });
+      });
+    });
+  });
+  describe('/jobs', () => {
+    describe('DEFAULT BEHAVIOUR', () => {
+      it('GET status:200 returns all jobs', () => {
+        return request
+          .get('/api/jobs')
+          .expect(200)
+          .then(({ body: { jobs } }) => {
+            jobs.forEach(job => {
+              expect(job).to.contain.keys(
+                'job_no',
+                'job_name',
+                'pm_first_name',
+                'pm_last_name',
+                'pm_email',
+                'pm_number'
+              );
+            });
+          });
+      });
+    });
+    describe('/jobs/:job_no', () => {
+      describe('DEFAULT BEHAVIOUR', () => {
+        it('GET status:200 a job based on job number', () => {
+          return request
+            .get('/api/jobs/123456')
+            .expect(200)
+            .then(({ body: { job } }) => {
+              expect(job).to.contain.keys(
+                'job_no',
+                'job_name',
+                'pm_first_name',
+                'pm_last_name',
+                'pm_email',
+                'pm_number'
+              );
+            });
+        });
+        describe('/jobs/:job_no/sites', () => {
+          describe('DEFAULT BEHAVIOUR', () => {
+            it('GET status:200 a jobs sites based on job id', () => {
+              return request
+                .get('/api/jobs/123456/sites')
+                .expect(200)
+                .then(({ body: { sites } }) => {
+                  sites.forEach(site => {
+                    expect(site).to.contain.keys(
+                      'site_id',
+                      'job_no',
+                      'site_name',
+                      'site_description'
+                    );
+                  });
+                });
+            });
+            it('POST status:200 adds a site', () => {
+              const newSite = {
+                site_name: 'test-site',
+                site_description: 'dry'
+              };
+              return request
+                .post('/api/jobs/123456/sites')
+                .send(newSite)
+                .expect(202)
+                .then(({ body: { response } }) => {
+                  expect(response).to.equal('Site created');
+                })
+                .then(() => {
+                  return request
+                    .get('/api/jobs/123456/sites')
+                    .expect(200)
+                    .then(({ body: { sites } }) => {
+                      expect(sites).to.have.length(5);
+                    });
+                });
+            });
+          });
+          //   describe('ERROR HANDLING', () => {
+          //     it('POST status:400 job does not exist to a user', () => {
+          //       const newLink = { job_no: 9999123 };
+          //       return request
+          //         .post('/api/users/jonny.bravo@arup.com/jobs/link')
+          //         .send(newLink)
+          //         .expect(400)
+          //         .then(({ body: { response } }) => {
+          //           expect(response).to.equal('Job not found');
+          //         });
+          //     });
+          //   });
         });
       });
     });
