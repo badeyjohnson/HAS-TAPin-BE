@@ -26,3 +26,7 @@ exports.getJobs = ({ email }) => {
     .join('users', 'users.email', '=', 'jobs_users.email')
     .where({ 'users.email': email });
 };
+
+exports.postJobUserLink = ({ email }, { job_no }) => {
+  return connection.insert({ job_no, email }).into('jobs_users');
+};

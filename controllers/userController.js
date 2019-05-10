@@ -1,4 +1,9 @@
-const { getAllUsers, getUser, getJobs } = require('../models/userModels');
+const {
+  getAllUsers,
+  getUser,
+  getJobs,
+  postJobUserLink
+} = require('../models/userModels');
 
 exports.fetchAllUsers = (req, res, next) => {
   getAllUsers(req.params).then(users => {
@@ -23,5 +28,11 @@ exports.fetchSingleUser = (req, res, next) => {
 exports.fetchUserJobs = (req, res, next) => {
   getJobs(req.params).then(jobs => {
     res.status(200).json({ jobs });
+  });
+};
+
+exports.sendJobUserLink = (req, res, next) => {
+  postJobUserLink(req.params, req.body).then(() => {
+    res.status(202).json({ response: 'Job added to user' });
   });
 };
