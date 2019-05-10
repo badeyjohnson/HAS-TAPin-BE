@@ -11,7 +11,7 @@ exports.getUser = ({ email }) => {
     .where({ email });
 };
 
-exports.getJobs = ({ email }) => {
+exports.getUserJobs = ({ email }) => {
   return connection
     .select(
       'jobs.job_no',

@@ -1,7 +1,7 @@
 const {
   getAllUsers,
   getUser,
-  getJobs,
+  getUserJobs,
   postJobUserLink,
   postNewJob
 } = require('../models/userModels');
@@ -27,7 +27,7 @@ exports.fetchSingleUser = (req, res, next) => {
 };
 
 exports.fetchUserJobs = (req, res, next) => {
-  getJobs(req.params).then(jobs => {
+  getUserJobs(req.params).then(jobs => {
     res.status(200).json({ jobs });
   });
 };
