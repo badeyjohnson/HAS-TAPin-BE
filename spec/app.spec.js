@@ -207,18 +207,109 @@ describe('/api', () => {
                 });
             });
           });
-          //   describe('ERROR HANDLING', () => {
-          //     it('POST status:400 job does not exist to a user', () => {
-          //       const newLink = { job_no: 9999123 };
+        });
+      });
+    });
+  });
+  describe.only('/sites', () => {
+    describe('DEFAULT BEHAVIOUR', () => {
+      it('GET status:200 returns all sites', () => {
+        return request
+          .get('/api/sites')
+          .expect(200)
+          .then(({ body: { sites } }) => {
+            sites.forEach(site => {
+              expect(site).to.contain.keys(
+                'site_id',
+                'job_no',
+                'site_name',
+                'site_description'
+              );
+            });
+          });
+      });
+    });
+    describe('/sites/:site_id', () => {
+      describe('DEFAULT BEHAVIOUR', () => {
+        it('GET status:200 a site based on site number', () => {
+          return request
+            .get('/api/sites/1')
+            .expect(200)
+            .then(({ body: { site } }) => {
+              expect(site).to.eql({
+                site_id: 1,
+                job_no: 123456,
+                site_name: 'site a',
+                site_description: 'wet'
+              });
+            });
+        });
+        describe('/sites/:site_id/:site_specific_id', () => {
+          describe('DEFAULT BEHAVIOUR', () => {
+            it('GET status:200 a risk assessments based on risk assessment id', () => {
+              return request
+                .get('/api/sites/1/1')
+                .expect(200)
+                .then(({ body: { riskAssessment } }) => {
+                  expect(riskAssessment[0]).to.include.keys(
+                    'answer',
+                    'created_at',
+                    'job_no',
+                    'mitigation_Measures',
+                    'multi_option',
+                    'risk',
+                    'site_description',
+                    'site_id',
+                    'site_name',
+                    'site_specific_id',
+                    'user',
+                    'question'
+                  );
+                });
+            });
+          });
+        });
+        describe('/sites/:site_id/risk_assessments', () => {
+          describe('DEFAULT BEHAVIOUR', () => {
+            it('GET status:200 a sites risk assessments based on site id', () => {
+              return request
+                .get('/api/sites/1/risk_assessments')
+                .expect(200)
+                .then(({ body: { riskAssessments } }) => {
+                  expect(riskAssessments).to.have.length(2);
+                  expect(riskAssessments[0]).to.include({
+                    site_id: 1,
+                    job_no: 123456,
+                    site_name: 'site a',
+                    site_description: 'wet',
+                    site_specific_id: 1,
+                    user: 'jonny.bravo@arup.com'
+                  });
+                });
+            });
+          });
+          // it('POST status:200 adds a site', () => {
+          //   const newSite = {
+          //     site_name: 'test-site',
+          //     site_description: 'dry'
+          //   };
+          //   return request
+          //     .post('/api/jobs/123456/sites')
+          //     .send(newSite)
+          //     .expect(202)
+          //     .then(({ body: { response } }) => {
+          //       expect(response).to.equal('Site created');
+          //     })
+          //     .then(() => {
           //       return request
-          //         .post('/api/users/jonny.bravo@arup.com/jobs/link')
-          //         .send(newLink)
-          //         .expect(400)
-          //         .then(({ body: { response } }) => {
-          //           expect(response).to.equal('Job not found');
+          //         .get('/api/jobs/123456/sites')
+          //         .expect(200)
+          //         .then(({ body: { sites } }) => {
+          //           expect(sites).to.have.length(5);
           //         });
           //     });
-          //   });
+          // });
+          // });
         });
       });
     });
