@@ -83,6 +83,14 @@ describe('/api', () => {
               .expect(202)
               .then(({ body: { response } }) => {
                 expect(response).to.equal('Job created');
+              })
+              .then(() => {
+                return request
+                  .get('/api/users/jonny.bravo@arup.com/jobs')
+                  .expect(200)
+                  .then(({ body: { jobs } }) => {
+                    expect(jobs).to.have.length(3);
+                  });
               });
           });
         });
@@ -96,6 +104,14 @@ describe('/api', () => {
                 .expect(202)
                 .then(({ body: { response } }) => {
                   expect(response).to.equal('Job added to user');
+                })
+                .then(() => {
+                  return request
+                    .get('/api/users/jonny.bravo@arup.com/jobs')
+                    .expect(200)
+                    .then(({ body: { jobs } }) => {
+                      expect(jobs).to.have.length(3);
+                    });
                 });
             });
           });
