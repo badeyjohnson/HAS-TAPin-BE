@@ -207,18 +207,123 @@ describe('/api', () => {
                 });
             });
           });
-          //   describe('ERROR HANDLING', () => {
-          //     it('POST status:400 job does not exist to a user', () => {
-          //       const newLink = { job_no: 9999123 };
-          //       return request
-          //         .post('/api/users/jonny.bravo@arup.com/jobs/link')
-          //         .send(newLink)
-          //         .expect(400)
-          //         .then(({ body: { response } }) => {
-          //           expect(response).to.equal('Job not found');
-          //         });
-          //     });
-          //   });
+        });
+      });
+    });
+  });
+  describe.only('/sites', () => {
+    describe('DEFAULT BEHAVIOUR', () => {
+      it('GET status:200 returns all sites', () => {
+        return request
+          .get('/api/sites')
+          .expect(200)
+          .then(({ body: { sites } }) => {
+            sites.forEach(site => {
+              expect(site).to.contain.keys(
+                'site_id',
+                'job_no',
+                'site_name',
+                'site_description'
+              );
+            });
+          });
+      });
+    });
+    describe('/sites/:site_id', () => {
+      describe('DEFAULT BEHAVIOUR', () => {
+        it('GET status:200 a site based on site number', () => {
+          return request
+            .get('/api/sites/1')
+            .expect(200)
+            .then(({ body: { site } }) => {
+              expect(site).to.eql({
+                site_id: 1,
+                job_no: 123456,
+                site_name: 'site a',
+                site_description: 'wet'
+              });
+            });
+        });
+        describe('/sites/:site_id/:site_specific_id', () => {
+          describe('DEFAULT BEHAVIOUR', () => {
+            it('GET status:200 a risk assessments based on risk assessment id', () => {
+              return request
+                .get('/api/sites/1/1')
+                .expect(200)
+                .then(({ body: { riskAssessment } }) => {
+                  expect(riskAssessment[0]).to.include.keys(
+                    'answer',
+                    'created_at',
+                    'job_no',
+                    'mitigation_Measures',
+                    'multi_option',
+                    'risk',
+                    'site_description',
+                    'site_id',
+                    'site_name',
+                    'site_specific_id',
+                    'user',
+                    'question'
+                  );
+                });
+            });
+          });
+        });
+        describe('/sites/:site_id/risk_assessments', () => {
+          describe('DEFAULT BEHAVIOUR', () => {
+            it('GET status:200 a sites risk assessments based on site id', () => {
+              return request
+                .get('/api/sites/1/risk_assessments')
+                .expect(200)
+                .then(({ body: { riskAssessments } }) => {
+                  expect(riskAssessments).to.have.length(2);
+                  expect(riskAssessments[0]).to.include({
+                    site_id: 1,
+                    job_no: 123456,
+                    site_name: 'site a',
+                    site_description: 'wet',
+                    site_specific_id: 1,
+                    user: 'jonny.bravo@arup.com'
+                  });
+                });
+            });
+          });
+          it('POST status:200 adds a risk assessment', () => {
+            const newRiskAssessment = {
+              email: 'jonny.bravo@arup.com',
+              response: [
+                {
+                  question_id: 1,
+                  answers_options: 1,
+                  mitigation_Measures: null,
+                  risk_level: 3,
+                  multi_option: 'test_string'
+                },
+                {
+                  question_id: 2,
+                  answers_options: 3,
+                  mitigation_Measures: null,
+                  risk_level: 2,
+                  multi_option: 'another_test_string'
+                }
+              ]
+            };
+            return request
+              .post('/api/sites/6/risk_assessments')
+              .send(newRiskAssessment)
+              .expect(202)
+              .then(({ body: { response } }) => {
+                expect(response).to.equal('Risk assessment created');
+              })
+              .then(() => {
+                return request
+                  .get('/api/sites/6/risk_assessments')
+                  .expect(200)
+                  .then(({ body: { riskAssessments } }) => {
+                    expect(riskAssessments).to.have.length(2);
+                  });
+              });
+          });
         });
       });
     });
