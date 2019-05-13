@@ -38,6 +38,6 @@ exports.sendNewRiskAssessment = (req, res, next) => {
 
 exports.fetchRiskAssessment = (req, res, next) => {
   getRiskAssessment(req.params).then(riskAssessment => {
-    res.status(200).json({ riskAssessment });
+    res.status(200).json({ count: riskAssessment.length, riskAssessment });
   });
 };

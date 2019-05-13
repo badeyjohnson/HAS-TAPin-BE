@@ -22,6 +22,7 @@ describe('/api', () => {
           .get('/api/users')
           .expect(200)
           .then(({ body: { users } }) => {
+            expect(users).to.have.length(4);
             users.forEach(user => {
               expect(user).to.contain.keys(
                 'email',
@@ -40,12 +41,11 @@ describe('/api', () => {
             .get('/api/users/jonny.bravo@arup.com')
             .expect(200)
             .then(({ body: { user } }) => {
-              expect(user).to.contain.keys(
-                'email',
-                'first_name',
-                'last_name',
-                'password'
-              );
+              expect(user).to.include({
+                email: 'jonny.bravo@arup.com',
+                first_name: 'jonny',
+                last_name: 'bravo'
+              });
             });
         });
       });
@@ -56,6 +56,7 @@ describe('/api', () => {
               .get('/api/users/jonny.bravo@arup.com/jobs')
               .expect(200)
               .then(({ body: { jobs } }) => {
+                expect(jobs).to.have.length(2);
                 jobs.forEach(jobs => {
                   expect(jobs).to.contain.keys(
                     'job_no',
@@ -75,7 +76,7 @@ describe('/api', () => {
               pm_first_name: 'firstname-d',
               pm_last_name: 'lastname-d',
               pm_email: 'test-d@newJob.com',
-              pm_number: '1234567'
+              pm_number: 1234567
             };
             return request
               .post('/api/users/jonny.bravo@arup.com/jobs')
@@ -90,6 +91,25 @@ describe('/api', () => {
                   .expect(200)
                   .then(({ body: { jobs } }) => {
                     expect(jobs).to.have.length(3);
+                    expect(jobs).to.eql([
+                      {
+                        job_no: 123456,
+                        job_name: 'test project a',
+                        pm_first_name: 'firstname-a',
+                        pm_last_name: 'lastname-a',
+                        pm_email: 'test-a@arup.com',
+                        pm_number: 12345678912
+                      },
+                      {
+                        job_no: 123123,
+                        job_name: 'test project b',
+                        pm_first_name: 'firstname-b',
+                        pm_last_name: 'lastname-b',
+                        pm_email: 'test-b@arup.com',
+                        pm_number: 12345678912
+                      },
+                      newJob
+                    ]);
                   });
               });
           });
@@ -97,7 +117,7 @@ describe('/api', () => {
         describe('/users/:email/jobs/link', () => {
           describe('DEFAULT BEHAVIOUR', () => {
             it('POST status:202 adds a existing job to a user', () => {
-              const newLink = { job_no: 123123 };
+              const newLink = { job_no: 123450 };
               return request
                 .post('/api/users/jonny.bravo@arup.com/jobs/link')
                 .send(newLink)
@@ -111,6 +131,32 @@ describe('/api', () => {
                     .expect(200)
                     .then(({ body: { jobs } }) => {
                       expect(jobs).to.have.length(3);
+                      expect(jobs).to.eql([
+                        {
+                          job_name: 'test project b',
+                          job_no: 123123,
+                          pm_email: 'test-b@arup.com',
+                          pm_first_name: 'firstname-b',
+                          pm_last_name: 'lastname-b',
+                          pm_number: 12345678912
+                        },
+                        {
+                          job_name: 'test project c',
+                          job_no: 123450,
+                          pm_email: 'test-c@arup.com',
+                          pm_first_name: 'firstname-c',
+                          pm_last_name: 'lastname-c',
+                          pm_number: 12345678912
+                        },
+                        {
+                          job_name: 'test project a',
+                          job_no: 123456,
+                          pm_email: 'test-a@arup.com',
+                          pm_first_name: 'firstname-a',
+                          pm_last_name: 'lastname-a',
+                          pm_number: 12345678912
+                        }
+                      ]);
                     });
                 });
             });
@@ -138,6 +184,7 @@ describe('/api', () => {
           .get('/api/jobs')
           .expect(200)
           .then(({ body: { jobs } }) => {
+            expect(jobs).to.have.length(3);
             jobs.forEach(job => {
               expect(job).to.contain.keys(
                 'job_no',
@@ -158,14 +205,14 @@ describe('/api', () => {
             .get('/api/jobs/123456')
             .expect(200)
             .then(({ body: { job } }) => {
-              expect(job).to.contain.keys(
-                'job_no',
-                'job_name',
-                'pm_first_name',
-                'pm_last_name',
-                'pm_email',
-                'pm_number'
-              );
+              expect(job).to.eql({
+                job_no: 123456,
+                job_name: 'test project a',
+                pm_first_name: 'firstname-a',
+                pm_last_name: 'lastname-a',
+                pm_email: 'test-a@arup.com',
+                pm_number: 12345678912
+              });
             });
         });
         describe('/jobs/:job_no/sites', () => {
@@ -211,7 +258,7 @@ describe('/api', () => {
       });
     });
   });
-  describe.only('/sites', () => {
+  describe('/sites', () => {
     describe('DEFAULT BEHAVIOUR', () => {
       it('GET status:200 returns all sites', () => {
         return request
@@ -251,6 +298,7 @@ describe('/api', () => {
                 .get('/api/sites/1/1')
                 .expect(200)
                 .then(({ body: { riskAssessment } }) => {
+                  expect(riskAssessment).to.have.length(35);
                   expect(riskAssessment[0]).to.include.keys(
                     'answer',
                     'created_at',
