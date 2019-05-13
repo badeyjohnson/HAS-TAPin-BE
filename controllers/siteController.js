@@ -30,7 +30,6 @@ exports.fetchSiteRiskAssessments = (req, res, next) => {
 
 exports.sendNewRiskAssessment = (req, res, next) => {
   postNewRiskAssessment(req.params, req.body).then(riskAssessment => {
-    console.log(riskAssessment)
     if (riskAssessment)
       res.status(202).json({ response: 'Risk assessment created' });
     else next(res.status(400).json({ response: 'errored' }));
