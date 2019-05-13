@@ -288,28 +288,42 @@ describe('/api', () => {
                 });
             });
           });
-          // it('POST status:200 adds a site', () => {
-          //   const newSite = {
-          //     site_name: 'test-site',
-          //     site_description: 'dry'
-          //   };
-          //   return request
-          //     .post('/api/jobs/123456/sites')
-          //     .send(newSite)
-          //     .expect(202)
-          //     .then(({ body: { response } }) => {
-          //       expect(response).to.equal('Site created');
-          //     })
-          //     .then(() => {
-          //       return request
-          //         .get('/api/jobs/123456/sites')
-          //         .expect(200)
-          //         .then(({ body: { sites } }) => {
-          //           expect(sites).to.have.length(5);
-          //         });
-          //     });
-          // });
-          // });
+          it('POST status:200 adds a risk assessment', () => {
+            const newRiskAssessment = {
+              email: 'jonny.bravo@arup.com',
+              response: [
+                {
+                  question_id: 1,
+                  answers_options: 1,
+                  mitigation_Measures: null,
+                  risk_level: 3,
+                  multi_option: 'test_string'
+                },
+                {
+                  question_id: 2,
+                  answers_options: 3,
+                  mitigation_Measures: null,
+                  risk_level: 2,
+                  multi_option: 'another_test_string'
+                }
+              ]
+            };
+            return request
+              .post('/api/sites/6/risk_assessments')
+              .send(newRiskAssessment)
+              .expect(202)
+              .then(({ body: { response } }) => {
+                expect(response).to.equal('Risk assessment created');
+              })
+              .then(() => {
+                return request
+                  .get('/api/sites/6/risk_assessments')
+                  .expect(200)
+                  .then(({ body: { riskAssessments } }) => {
+                    expect(riskAssessments).to.have.length(2);
+                  });
+              });
+          });
         });
       });
     });
