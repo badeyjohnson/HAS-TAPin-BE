@@ -54,7 +54,7 @@ exports.postNewRiskAssessment = ({ site_id }, { email, response }) => {
     });
 };
 
-exports.getRiskAssessment = ({ site_specific_id }) => {
+exports.getRiskAssessment = ({ site_id, site_specific_id }) => {
   return connection
     .select(
       'job_no',
@@ -79,13 +79,13 @@ exports.getRiskAssessment = ({ site_specific_id }) => {
       '=',
       'site_specific.site_specific_id'
     )
-    .join(
+    .leftJoin(
       'risk_level',
       'risk_level.risk_level_id',
       '=',
       'risks_answers.risk_level'
     )
-    .join(
+    .leftJoin(
       'answers_options',
       'answers_options.answers_options_id',
       '=',
@@ -97,5 +97,8 @@ exports.getRiskAssessment = ({ site_specific_id }) => {
       '=',
       'risks_answers.question_id'
     )
-    .where({ 'site_specific.site_specific_id': site_specific_id });
+    .where({
+      'site_specific.site_specific_id': site_specific_id,
+      'sites.site_id': site_id
+    });
 };
