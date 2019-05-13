@@ -1,5 +1,6 @@
-{ "/api" :
+{ "/api" :  
   { 
+    "/routes" : "returns routes.json",
     "/users" : {
       "GET -> /" : "returns all users", 
       "GET -> /:email" : "returns a single user by email",
@@ -18,6 +19,14 @@
       "POST -> /:job_no/sites" : {
         "creates new site in database" : "POST: {site_name: '', site_description: ''}"
       }
+    },
+    "/sites" : {
+      "GET -> /" : "returns all sites",
+      "GET -> /:site_id" : "returns a single site by id",
+      "GET -> /:site_id/risk_assessments" : "returns all risk assessment ids for the specified site",
+      "POST -> /:site_id/risk_assessments" : {
+        "creates new risk asssessment in database" : "POST: {email: '', response: [{question_id: 1, answers_options: '', mitigation_Measures: '', risk_level: '', multi_option: ''}, {question_id: 2, ...}, }"},
+      "GET -> /:site_id/:site_specific_id" : "returns the specified filled risk assessment"
     }
   }
 }
