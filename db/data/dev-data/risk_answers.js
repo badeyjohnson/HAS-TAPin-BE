@@ -84,7 +84,7 @@ module.exports = [
     site_specific_id: 1,
     answers_options: 1,
     mitigation_Measures: null,
-    risk_level: null,
+    risk_level: 1,
     multi_option: null
   },
   {
@@ -269,8 +269,11 @@ module.exports = [
     answers_options: null,
     mitigation_Measures: null,
     risk_level: null,
-    multi_option:
-      '["Safety helmet", "Safety boots", "High visibility jacket/vest (Yellow)"]'
+    multi_option: JSON.stringify([
+      'Safety helmet',
+      'Safety boots',
+      'High visibility jacket / vest (Yellow)'
+    ])
   },
   {
     question_id: 35,

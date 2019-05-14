@@ -1,32 +1,34 @@
-{ "/api" :  
-  { 
-    "/routes" : "returns routes.json",
-    "/users" : {
-      "GET -> /" : "returns all users", 
-      "GET -> /:email" : "returns a single user by email",
-      "GET -> /:email/jobs" : "returns all jobs for the specified user",
-      "POST -> /:email/jobs" : {
-        "creates new job in database and links user" : "POST: {job_no: '', email: '', job_name: '', pm_first_name: '', pm_last_name: '', pm_email: '', pm_number: ''}"
+{
+  "/api": {
+    "/routes": "returns routes.json",
+    "/users": {
+      "GET -> /": "returns all users",
+      "GET -> /:email": "returns a single user by email",
+      "GET -> /:email/jobs": "returns all jobs for the specified user",
+      "POST -> /:email/jobs": {
+        "creates new job in database and links user": "POST: {job_no: '', email: '', job_name: '', pm_first_name: '', pm_last_name: '', pm_email: '', pm_number: ''}"
       },
-      "POST -> /:email/jobs/link" : {
-        "links user to an existing job in the database" : "POST: {job_no: ''}"
+      "POST -> /:email/jobs/link": {
+        "links user to an existing job in the database": "POST: {job_no: ''}"
       }
     },
-    "/jobs" : {
-      "GET -> /" : "returns all jobs",
-      "GET -> /:job_no" : "returns a single job by job number",
-      "GET -> /:job_no/sites" : "returns all sites for the specified job",
-      "POST -> /:job_no/sites" : {
-        "creates new site in database" : "POST: {site_name: '', site_description: ''}"
+    "/jobs": {
+      "GET -> /": "returns all jobs",
+      "GET -> /:job_no": "returns a single job by job number",
+      "GET -> /:job_no/sites": "returns all sites for the specified job",
+      "POST -> /:job_no/sites": {
+        "creates new site in database": "POST: {site_name: '', site_description: ''}"
       }
     },
-    "/sites" : {
-      "GET -> /" : "returns all sites",
-      "GET -> /:site_id" : "returns a single site by id",
-      "GET -> /:site_id/risk_assessments" : "returns all risk assessment ids for the specified site",
-      "POST -> /:site_id/risk_assessments" : {
-        "creates new risk asssessment in database" : "POST: {email: '', response: [{question_id: 1, answers_options: '', mitigation_Measures: '', risk_level: '', multi_option: ''}, {question_id: 2, ...}, }"},
-      "GET -> /:site_id/:site_specific_id" : "returns the specified filled risk assessment"
-    }
+    "/sites": {
+      "GET -> /": "returns all sites",
+      "GET -> /:site_id": "returns a single site by id",
+      "GET -> /:site_id/risk_assessments": "returns all risk assessment ids for the specified site",
+      "POST -> /:site_id/risk_assessments": {
+        "creates new risk asssessment in database": "POST: {email: '', response: [{question_id: 1, answers_options: '', mitigation_Measures: '', risk_level: '', multi_option: ''}, {question_id: 2, ...}, }"
+      },
+      "GET -> /:site_id/:site_specific_id": "returns the specified filled risk assessment"
+    },
+    "/maps/:site_id": "returns a single map by siteid"
   }
 }
