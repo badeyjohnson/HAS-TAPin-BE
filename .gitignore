@@ -62,3 +62,6 @@ typings/
 
 # knexfile with mySQL user/password
 knexfile.js
+
+#yaml
+app.yaml
