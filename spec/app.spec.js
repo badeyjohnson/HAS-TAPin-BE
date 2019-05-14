@@ -317,6 +317,18 @@ describe('/api', () => {
             });
           });
         });
+        describe('sites/:site_id/new_risk_assessment', () => {
+          describe('DEFAULT BEHAVIOUR', () => {
+            it('GET status:200 and a new risk assessment', () => {
+              return request
+                .get('/api/sites/1/new_risk_assessment')
+                .expect(200)
+                .then(({ body: { questions } }) => {
+                  expect(questions).to.have.length(35);
+                });
+            });
+          });
+        });
         describe('/sites/:site_id/risk_assessments', () => {
           describe('DEFAULT BEHAVIOUR', () => {
             it('GET status:200 a sites risk assessments based on site id', () => {
