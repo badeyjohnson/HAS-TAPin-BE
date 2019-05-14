@@ -3,7 +3,8 @@ const {
   getSite,
   getSitesRiskAssessments,
   postNewRiskAssessment,
-  getRiskAssessment
+  getRiskAssessment,
+  getRiskAssessmentQuestions
 } = require('../models/siteModels');
 
 exports.fetchAllSites = (req, res, next) => {
@@ -19,6 +20,11 @@ exports.fetchSingleSite = (req, res, next) => {
     } else {
       res.status(200).json({ site });
     }
+  });
+};
+exports.fetchRiskAssessmentQuestions = (req, res, next) => {
+  getRiskAssessmentQuestions().then(questions => {
+    res.status(200).json({ questions });
   });
 };
 
