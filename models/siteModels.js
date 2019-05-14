@@ -11,6 +11,10 @@ exports.getSite = ({ site_id }) => {
     .where({ site_id });
 };
 
+exports.getRiskAssessmentQuestions = () => {
+  return connection.select('*').from('questions');
+};
+
 exports.getSitesRiskAssessments = ({ site_id }) => {
   return connection
     .select('*')
