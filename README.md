@@ -77,7 +77,6 @@ source ~/.zshrc
 `npm run setup-dbs` to set up the databases, 
 `npm run seed-test` to set up seed the test database.
 
-
 ## Built-With
 
 - [Express](https://expressjs.com/) - The web framework used
