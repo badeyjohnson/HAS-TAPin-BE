@@ -1,0 +1,12 @@
+exports.bookletData = require('./booklet');
+exports.jobsData = require('./jobs');
+exports.mapsData = require('./maps');
+exports.usersData = require('./users');
+exports.sitesData = require('./sites');
+exports.siteUsersData = require('./site_users');
+exports.questionsData = require('./questions');
+exports.riskLevelData = require('./risk_level');
+exports.answersOptionsData = require('./answers_options');
+exports.siteSpecficData = require('./site_specfic');
+exports.riskAnswersData = require('./risk_answers');
+exports.jobsUsersData = require('./jobs_users');
