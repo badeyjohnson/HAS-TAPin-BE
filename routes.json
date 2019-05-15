@@ -27,8 +27,12 @@
       "POST -> /:site_id/risk_assessments": {
         "creates new risk asssessment in database": "POST: {email: '', response: [{question_id: 1, answers_options: '', mitigation_Measures: '', risk_level: '', multi_option: ''}, {question_id: 2, ...}, }"
       },
+      "GET -> /:site_id/new_risk_assessment": "returns an empty risk assessment",
       "GET -> /:site_id/:site_specific_id": "returns the specified filled risk assessment"
     },
-    "/maps/:site_id": "returns a single map by siteid"
+    "/maps": {
+      "GET -> /:site_id": "returns a single map by siteid",
+      "POST -> /:site_id": "POSTS a single map by siteid"
+    }
   }
 }
