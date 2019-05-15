@@ -258,6 +258,32 @@ describe('/api', () => {
       });
     });
   });
+  describe.only('/maps/:site_id', () => {
+    describe('DEFAULT BEHAVIOUR', () => {
+      it('POST status:202 adds new map coords to maps', () => {
+        const newMap = {
+          coordinates: [
+            { latitude: 53.798332, longitude: -1.558739 },
+            { latitude: 53.798553, longitude: -1.530716 },
+            { latitude: 53.787372, longitude: -1.531405 },
+            { latitude: 53.788328, longitude: -1.558051 }
+          ]
+        };
+        return request
+          .post('/api/maps/5')
+          .send(newMap)
+          .expect(202)
+          .then(() => {
+            return request
+              .get('/api/maps/5')
+              .expect(200)
+              .then(({ body: { map } }) => {
+                expect(map).to.have.length(1);
+              });
+          });
+      });
+    });
+  });
   describe('/sites', () => {
     describe('DEFAULT BEHAVIOUR', () => {
       it('GET status:200 returns all sites', () => {
