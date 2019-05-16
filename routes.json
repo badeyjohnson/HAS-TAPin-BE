@@ -6,7 +6,7 @@
       "GET -> /:email": "returns a single user by email",
       "GET -> /:email/jobs": "returns all jobs for the specified user",
       "POST -> /:email/jobs": {
-        "creates new job in database and links user": "POST: {job_no: '', email: '', job_name: '', pm_first_name: '', pm_last_name: '', pm_email: '', pm_number: ''}"
+        "creates new job in database and links user": "POST: {job_no: '', job_name: '', pm_first_name: '', pm_last_name: '', pm_email: '', pm_number: ''}"
       },
       "POST -> /:email/jobs/link": {
         "links user to an existing job in the database": "POST: {job_no: ''}"

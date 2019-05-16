@@ -29,7 +29,11 @@ exports.fetchJobSites = (req, res, next) => {
 
 exports.sendNewSite = (req, res, next) => {
   postNewSite(req.params, req.body).then(site => {
-    if (site) res.status(202).json({ response: 'Site created' });
-    else next(res.status(400).json({ response: 'errored' }));
+    if (site) {
+      getJobSites(req.params).then(sites => {
+        const addedSite = sites[sites.length - 1];
+        res.status(202).json({ addedSite });
+      });
+    } else next(res.status(400).json({ response: 'errored' }));
   });
 };
