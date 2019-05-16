@@ -18,7 +18,7 @@
     "start": "node listen.js",
     "lint": "eslint ./ --fix",
     "posttest": "npm run lint",
-    "deploy": "gcloud app deploy"
+    "deploy": "gcloud app deploy app.flexible.yaml"
   },
   "author": "",
   "license": "MIT",
