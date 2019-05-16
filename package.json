@@ -18,7 +18,8 @@
     "start": "node listen.js",
     "lint": "eslint ./ --fix",
     "posttest": "npm run lint",
-    "deploy": "gcloud app deploy app.flexible.yaml"
+    "deploy": "gcloud app deploy app.flexible.yaml",
+    "sql-connect": "./cloud_sql_proxy -dir=/cloudsql -instances=hastapin:europe-west1:hastapin-db                   -credential_file=./HASTAPin-ca1f2e166672.json &"
   },
   "author": "",
   "license": "MIT",
