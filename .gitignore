@@ -65,3 +65,6 @@ knexfile.js
 
 #yaml
 app.yaml
+
+# key
+./HASTAPin-ca1f2e166672.json
