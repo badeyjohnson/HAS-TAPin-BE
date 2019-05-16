@@ -241,8 +241,8 @@ describe('/api', () => {
                 .post('/api/jobs/123456/sites')
                 .send(newSite)
                 .expect(202)
-                .then(({ body: { response } }) => {
-                  expect(response).to.equal('Site created');
+                .then(({ body: { addedSite } }) => {
+                  expect(addedSite.site_id).to.equal(7);
                 })
                 .then(() => {
                   return request
@@ -258,7 +258,7 @@ describe('/api', () => {
       });
     });
   });
-  describe.only('/maps/:site_id', () => {
+  describe('/maps/:site_id', () => {
     describe('DEFAULT BEHAVIOUR', () => {
       it('POST status:202 adds new map coords to maps', () => {
         const newMap = {
